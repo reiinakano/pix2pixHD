@@ -6,9 +6,10 @@ from util import util
 import torch
 
 class BaseOptions():
-    def __init__(self):
+    def __init__(self, args=None):
         self.parser = argparse.ArgumentParser()
         self.initialized = False
+        self.args = args
 
     def initialize(self):    
         # experiment specifics
@@ -67,7 +68,7 @@ class BaseOptions():
     def parse(self, save=True):
         if not self.initialized:
             self.initialize()
-        self.opt = self.parser.parse_args()
+        self.opt = self.parser.parse_args(self.args)
         self.opt.isTrain = self.isTrain   # train or test
 
         str_ids = self.opt.gpu_ids.split(',')
