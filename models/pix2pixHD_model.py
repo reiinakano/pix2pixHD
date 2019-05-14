@@ -211,10 +211,7 @@ class Pix2PixHDModel(BaseModel):
         else:
             input_concat = input_label        
            
-        if torch.__version__.startswith('0.4'):
-            with torch.no_grad():
-                fake_image = self.netG.forward(input_concat)
-        else:
+        with torch.no_grad():
             fake_image = self.netG.forward(input_concat)
         return fake_image
 
